@@ -54,6 +54,7 @@ def check_hashes(hash_fname):
     # Split into lines.
     lines = text_file.splitlines()
     # For each line:
+    i = 0
     for line in lines:
         # Split each line into expected_hash and filename
         a = line.split('  ')
@@ -65,7 +66,9 @@ def check_hashes(hash_fname):
         # Check actual hash against expected hash
         if hash_value != a[0]:
             break
-        return True
+        i += 1
+        if i == 3:
+            return True
         
         # Return False if any of the hashes do not match.
     return False
