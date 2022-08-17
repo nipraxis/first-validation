@@ -40,26 +40,63 @@ exp_hash = '7fa09f0f0dc11836094b8d360dc63943704796a1'
 assert calc_hash == exp_hash, f'{calc_hash} does not match {exp_hash}'
 
 
-def check_hashes(hash_fname):
-    """ Check hashes and filenames in given in file `hash_fname`
+def check_hashes(hash_fname, data_dir):
+    """ Check hashes and filenames in given in file `hash_fname`.
+
+    `hash_fname` is a filename or Path of a file containing lines like::
+
+        7fa09f0f0dc11836094b8d360dc63943704796a1  24719.f3_beh_CHYM.csv
+
+    where the first string is the SHA1 hash for the file, and the second is the
+    filename.  The filename is relative to the `data_dir` directory.
+
+    Parameters
+    ----------
+    hash_fname : str or Path
+        String giving filename of text file containing hash value, filename
+        pairs, or Path object pointing to file, e.g. "data/data_hashes.txt".
+    data_dir : str or Path
+        String giving directory containing files named in `hash_fname` above,
+        e.g. "data"
+
+    Returns
+    -------
+    all_ok : {True or False}
+        Return True if all the hashes recorded in `hash_fname` match the
+        calculated hashes for the corresponding filenames, False if any of the
+        hashes do not match.
     """
+    # Convert hash and directory to Path objects for convenience.
     hash_pth = Path(hash_fname)
-    # Directory containing hash filenames file.
-    data_dir = hash_pth.parent
+    data_dir = Path(data_dir)
     # Read in text for hash filename
-    hash_text = hash_pth.read_text()
+    text = hash_pth.read_text()
     # Split into lines.
+    lines = text.splitlines()
     # For each line:
-    for line in hash_text.splitlines():
+    for line in lines:
         # Split each line into expected_hash and filename
-        fhash, fname = line.split()
+        expected_hash, filename = line.split()
         # Calculate actual hash for given filename.
-        pth = data_dir / fname
+        # Careful - which directory is the filename in?
+        actual_hash = hash_for_fname(data_dir / filename)
         # Check actual hash against expected hash
         # Return False if any of the hashes do not match.
-        if not hash_for_fname(pth) == fhash:
+        if actual_hash != expected_hash:
             return False
     return True
 
 
-assert check_hashes(hashes_pth), 'Check hash list does not return True'
+# Correct hash list file returns True
+assert check_hashes(hashes_pth, data_pth), \
+        'Check hash list does not return True'
+# Incorrect hash list files return False
+test_dir = Path('tests')
+assert not check_hashes(test_dir / 'first_bad.txt', data_pth), \
+        'first_bad has bad first hash, should give False'
+assert not check_hashes(test_dir / 'second_bad.txt', data_pth), \
+        'second_bad has bad second hash, should give False'
+assert not check_hashes(test_dir / 'last_bad.txt', data_pth), \
+        'last_bad has bad last hash, should give False'
+
+print('Finished.')

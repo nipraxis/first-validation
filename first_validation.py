@@ -81,12 +81,15 @@ def check_hashes(hash_fname, data_dir):
 
 
 # Correct hash list file returns True
-assert check_hashes(hashes_pth), 'Check hash list does not return True'
+assert check_hashes(hashes_pth, data_pth), \
+        'Check hash list does not return True'
 # Incorrect hash list files return False
 test_dir = Path('tests')
-assert not check_hashes(test_dir / 'first_bad.txt'), \
+assert not check_hashes(test_dir / 'first_bad.txt', data_pth), \
         'first_bad has bad first hash, should give False'
-assert not check_hashes(test_dir / 'second_bad.txt'), \
+assert not check_hashes(test_dir / 'second_bad.txt', data_pth), \
         'second_bad has bad second hash, should give False'
-assert not check_hashes(test_dir / 'last_bad.txt'), \
+assert not check_hashes(test_dir / 'last_bad.txt', data_pth), \
         'last_bad has bad last hash, should give False'
+
+print('Finished.')
