@@ -31,7 +31,9 @@ def hash_for_fname(fname):
     # Convert a string filename to a Path object.
     fpath = Path(fname)
     # Your code here.
-    return 'not-really-the-hash'
+    contents = fpath.read_bytes()
+    hash_value = sha1(contents).hexdigest()
+    return hash_value
 
 
 # Fill in the function above to make the test below pass.
@@ -48,13 +50,24 @@ def check_hashes(hash_fname):
     # Directory containing hash filenames file.
     data_dir = hash_pth.parent
     # Read in text for hash filename
+    hash_file_contents = hash_pth.read_text()
+
     # Split into lines.
+    lst_of_splitted_lines = hash_file_contents.splitlines()
     # For each line:
+    for line in lst_of_splitted_lines:
         # Split each line into expected_hash and filename
+        [exp_hash, gap, filename] = line.split(sep=' ')
+
         # Calculate actual hash for given filename.
+        act_hash = hash_for_fname(data_dir / filename)
+
         # Check actual hash against expected hash
+        result = (act_hash == exp_hash)
+
         # Return False if any of the hashes do not match.
-    return False
+    return result
 
-
+#check_hashes(hashes_pth)
 assert check_hashes(hashes_pth), 'Check hash list does not return True'
+print("Finished!")
