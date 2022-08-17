@@ -55,7 +55,7 @@ def check_hashes(hash_fname):
     # For each line:
     for line in lines:
         # Split each line into expected_hash and filename
-        a = line.split('  ')
+        a = line.split()
         # Calculate actual hash for given filename.
         path = data_dir / a[1]
         content = path.read_bytes()
