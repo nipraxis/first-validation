@@ -32,8 +32,7 @@ def hash_for_fname(fname):
     fpath = Path(fname)
     # Your code here.
     contents_fpath = fpath.read_bytes()
-    hash_value_fpath = sha1(contents_fpath).hexdigest()
-    return hash_value_fpath
+    return sha1(contents_fpath).hexdigest()
 
 
 # Fill in the function above to make the test below pass.
