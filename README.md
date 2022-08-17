@@ -43,7 +43,7 @@ make sure you clone your own fork, with your own URL**.
 
 ```
 # Your git clone command here:
-git clone https://github.com/your-github-username/first-valation
+git clone https://github.com/your-github-username/first-validation
 ```
 
 Next:
@@ -75,7 +75,7 @@ git branch -v
 Now you are ready to do the work.  First get the images you need.
 
 ```
-python get_data.py
+python3 get_data.py
 ```
 
 You should see something like this:
@@ -111,7 +111,7 @@ You will see an extra file in that directory, called `data_hashes.txt`.
 Next run the as-yet-unfixed data validation script:
 
 ```
-python first_validation.py
+python3 first_validation.py
 ```
 
 Notice the output.  Notice too that you get an `AssertionError`.  This is the error you are aiming to fix.
@@ -155,8 +155,8 @@ Finally, push the changes up to your *fork*:
 git push origin fix-validation --set-upstream
 ```
 
-You will see a message at the console telling you the link to go to, to make
-a pull request.  In my case that link was
+You will see a message at the console telling you the link to go to, to make a
+pull request.  In my case that link was
 "https://github.com/matthew-brett/first-validation/pull/new/fix-validation",
 but your link will be different, because it will contain your own Github user
 name.
