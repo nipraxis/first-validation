@@ -43,7 +43,7 @@ make sure you clone your own fork, with your own URL**.
 
 ```
 # Your git clone command here:
-git clone https://github.com/your-github-username/first-valation
+git clone https://github.com/your-github-username/first-validation
 ```
 
 Next:
