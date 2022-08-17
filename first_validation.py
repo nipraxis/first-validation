@@ -53,24 +53,18 @@ def check_hashes(hash_fname):
     # Split into lines.
     lines = text_file.splitlines()
     # For each line:
-    i = 0
     for line in lines:
         # Split each line into expected_hash and filename
-        a = line.split()
+        hash_value, fn_name = line.split()
         # Calculate actual hash for given filename.
-        path = data_dir / a[1]
-        content = path.read_bytes()
-        hash_value = sha1(content).hexdigest()
+        path = data_dir / fn_name
+        hash_value_calc = hash_for_fname(path)
 
         # Check actual hash against expected hash
-        if hash_value != a[0]:
-            break
-        i += 1
-        if i == 3:
-            return True
-        
-        # Return False if any of the hashes do not match.
-    return False
+        if hash_value != hash_value_calc:
+            # Return False if any of the hashes do not match.
+            return False
+    return True
 
 
 assert check_hashes(hashes_pth), 'Check hash list does not return True'
