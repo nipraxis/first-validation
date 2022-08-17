@@ -31,7 +31,9 @@ def hash_for_fname(fname):
     # Convert a string filename to a Path object.
     fpath = Path(fname)
     # Your code here.
-    return 'not-really-the-hash'
+    contents = fpath.read_bytes()
+    hash_value = sha1(contents)hexdigest()
+    return hash_value
 
 
 # Fill in the function above to make the test below pass.
