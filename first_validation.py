@@ -1,6 +1,7 @@
 """ First validation
 """
 
+from concurrent.futures.process import _threads_wakeups
 from pathlib import Path
 
 from hashlib import sha1
@@ -15,12 +16,8 @@ contents = example_pth.read_bytes()
 hash_value = sha1(contents).hexdigest()
 
 print(f'Hash value for {example_pth} is {hash_value}')
-
 hashes_pth = data_pth / 'data_hashes.txt'
-
-print(f'Contents of {hashes_pth}')
 hashes_text = hashes_pth.read_text()
-print(hashes_text)
 
 
 def hash_for_fname(fname):
@@ -30,8 +27,10 @@ def hash_for_fname(fname):
     """
     # Convert a string filename to a Path object.
     fpath = Path(fname)
+    con=fpath.read_bytes()
+    hash_v=sha1(con).hexdigest()
     # Your code here.
-    return 'not-really-the-hash'
+    return hash_v
 
 
 # Fill in the function above to make the test below pass.
@@ -48,13 +47,24 @@ def check_hashes(hash_fname):
     # Directory containing hash filenames file.
     data_dir = hash_pth.parent
     # Read in text for hash filename
+    with open(hash_pth) as f:
+        lines= f.readlines()
+        f.close()
     # Split into lines.
+    #lines.strip()
+
     # For each line:
+    for line in lines:
         # Split each line into expected_hash and filename
+        spl= line.split()
         # Calculate actual hash for given filename.
+        cal_hash=hash_for_fname(data_pth/spl[1])
         # Check actual hash against expected hash
+        act_hash=spl[0]
         # Return False if any of the hashes do not match.
-    return False
+        if (cal_hash!=act_hash):
+            return False
+    return True
 
 
 assert check_hashes(hashes_pth), 'Check hash list does not return True'
