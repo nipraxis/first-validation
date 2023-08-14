@@ -11,6 +11,10 @@ cd $HOME/Documents
 ```{warning}
 If you get `The system cannot find the path specified`, and you are on Windows,
 make sure you are running a **Powershell** shell, not the much older Windows `cmd` shell.
+
+If you get this message, and you are trying things on out a JupyterHub or other
+Linux system, check that the `Documents` directory exists in your home
+directory, and, if not, create it with `mkdir $HOME/Documents`.
 ```
 
 Make a new directory to store your work, if you have not already done this in
@@ -117,7 +121,9 @@ python3 first_validation.py
 Notice the output.  Notice too that you get an `AssertionError`.  This is the error you are aiming to fix.
 
 Open the script in a text editor.  At a pinch you can open in Textedit (Mac) or
-Wordpad (Windows).   On Unix you can use the Nano editor.  At a pinch you can even use the Jupyter Notebook itself, opening the `first_validation.py` file from the notebook interface.
+Wordpad (Windows).   On Unix you can use the Nano editor (use `nano` at the
+command line).  At a pinch you can even use the Jupyter Notebook itself,
+opening the `first_validation.py` file from the notebook interface.
 
 Look at the script.  Edit the script to fix the assertion error.  Run `python first_validation.py` again.  You should see another, new `AssertionError`.  If you have time, try fixing that error.
 
