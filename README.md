@@ -70,6 +70,13 @@ We do that like this:
 git branch fix-validation
 ```
 
+```{warning}
+Before you run the next command, bear in mind that Git displays information
+using a *pager*.  This is a way of outputting text that takes into account
+there may be multiple pages.  When you are in the pager, you can press the
+down and up arrow (cursor) keys to move around and press `q` to quit.
+```
+
 ```
 # Show the branches verbosely (-v).  Notice the asterisk on "main".
 git branch -v
