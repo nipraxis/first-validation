@@ -68,10 +68,19 @@ We do that like this:
 ```
 # Create the branch (bookmark).
 git branch fix-validation
+```
+
+```
 # Show the branches verbosely (-v).  Notice the asterisk on "main".
 git branch -v
+```
+
+```
 # Checkout the branch ready for work.
 git checkout fix-validation
+```
+
+```
 # Show the branches verbosely (-v).  Notice the asterisk on "fix-validation".
 git branch -v
 ```
