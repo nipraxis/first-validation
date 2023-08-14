@@ -8,14 +8,8 @@ Git, Python and the various Python libraries installed.
 cd $HOME/Documents
 ```
 
-```{warning}
-If you get `The system cannot find the path specified`, and you are on Windows,
-make sure you are running a **Powershell** shell, not the much older Windows `cmd` shell.
-
-If you get this message, and you are trying things on out a JupyterHub or other
-Linux system, check that the `Documents` directory exists in your home
-directory, and, if not, create it with `mkdir $HOME/Documents`.
-```
+> **Warning**
+> If you get `The system cannot find the path specified`, and you are on Windows, make sure you are running a **Powershell** shell, not the much older Windows `cmd` shell. If you get this message, and you are trying things on out a JupyterHub or other Linux system, check that the `Documents` directory exists in your home directory, and, if not, create it with `mkdir $HOME/Documents`.
 
 Make a new directory to store your work, if you have not already done this in
 the [installation instructions](https://textbook.nipraxis.org/installation).
@@ -70,12 +64,11 @@ We do that like this:
 git branch fix-validation
 ```
 
-```{warning}
-Before you run the next command, bear in mind that Git displays information
+> **Warning**
+> Before you run the next command, bear in mind that Git displays information
 using a *pager*.  This is a way of outputting text that takes into account
 there may be multiple pages.  When you are in the pager, you can press the
 down and up arrow (cursor) keys to move around and press `q` to quit.
-```
 
 ```
 # Show the branches verbosely (-v).  Notice the asterisk on "main".
